@@ -27,7 +27,7 @@ covars <- read.csv('E:\\Postdoc Grassland Resilience\\EnvironmentData\\covariate
 stability10km <- read.csv('E:\\Postdoc Grassland Resilience\\MODIS6\\Resilience\\REFIT2stability10km2sd.csv', header = TRUE)
 
 stability10km$evi.rec <- stability10km$evi.rec*8
-stability10km$evi.recrate <- stability10km$evi.recrate*8
+stability10km$evi.recrate <- stability10km$evi.recrate/8
 
 
 # extract metrics required for modelling
