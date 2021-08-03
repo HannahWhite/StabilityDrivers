@@ -4,6 +4,7 @@
 
 ## Hannah White 28.08.2018
 ## Modified 15.11.2018 so only climate from 1950-1999
+##  Modified 19.05.20 to use vascplant coords rather than MODIS
 
 library(raster)
 library(rgdal)
@@ -36,12 +37,14 @@ eobs.itm <- spTransform(coords.sp, CRS('+init=epsg:29903')) #  Irish grid
 
 
 ## read in dataframe with sites want to get climate data for
+corine <- read.csv('E:\\Postdoc Grassland Resilience\\LandCoverData\\corine.agg.csv', header = TRUE)
 
-recovery <- read.csv('J:\\Postdoc Grassland Resilience\\ResilienceData\\EVI\\recovery.csv', header = TRUE)
+vasc.nat <- read.csv('E:\\Postdoc Grassland Resilience\\Species richness\\vasc.nat.csv', header = TRUE)
+vasc.nat <- vasc.nat[vasc.nat$Location %in% corine$GR, ] #just get terrestrial hectads'
 
-coords.data <- recovery[,1:2]
+coords.data <- vasc.nat[,2:3]
 
-coords.data.sp <- SpatialPointsDataFrame(coords.data, recovery) # turn into spatial data so that can use nearest neighbour approach 
+coords.data.sp <- SpatialPointsDataFrame(coords.data, vasc.nat) # turn into spatial data so that can use nearest neighbour approach 
 
 proj4string(coords.data.sp) <- CRS('+init=epsg:29903') # Irish grid
 
