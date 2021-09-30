@@ -140,65 +140,65 @@ intervals(m.var.land)
 
 
 #m.resist.null <- gls(evi.mag ~ 1, correlation=corExp(form=~east+north, metric='euclidean'),
-#                     method = 'ML', data = stability.env)
+#                     method = 'ML', data = hetero.div)
 
-## AIC = -51.39468
+## AIC = -10.24993
 
 
-m.resist <- gls(evi.mag ~ nat.fres + landscape.het + var.tg + var.rr + ft.tg + ft.rr, correlation=corExp(form=~east+north, metric='euclidean'),
-                method = 'ML', data = stability.env)
-intervals(m.resist)
-## AIC = -77.56113
+#m.resist <- gls(evi.mag ~ nat.fres + landscape.het + var.tg + var.rr + ft.tg + ft.rr, correlation=corExp(form=~east+north, metric='euclidean'),
+#               method = 'ML', data = hetero.div)
+#intervals(m.resist)
+## AIC =  -17.84
 
 
 ## Diversity only
 
 #m.resist.div <- gls(evi.mag ~ nat.fres , correlation=corExp(form=~east+north, metric='euclidean'),
-#                    method = 'ML', data = stability.env)
+#                    method = 'ML', data = hetero.div)
 
-## AIC = -56.39934
+
+## AIC = -9.258068
 
 
 ## Landcover only
 
 
 #m.resist.land <- gls(evi.mag ~ landscape.het, correlation=corExp(form=~east+north, metric='euclidean'),
-#                     method = 'ML', data = stability.env)
+#                     method = 'ML', data = hetero.div)
 
-## AIC = -56.89603
+## AIC = -8.253487
 
 
 ## Climate only
 
-#m.resist.clim <- gls(evi.mag ~ var.tg + var.rr + ft.tg + ft.rr, correlation=corExp(form=~east+north, metric='euclidean'),
-#                     method = 'ML', data = stability.env)
+m.resist.clim <- gls(evi.mag ~ var.tg + var.rr + ft.tg + ft.rr, correlation=corExp(form=~east+north, metric='euclidean'),
+                     method = 'ML', data = hetero.div)
 
-## AIC = -76.73921
+## AIC = -20.17205
 
 
 ## Diversity and landcover
 
 #m.resist.divland <- gls(evi.mag ~ nat.fres + landscape.het, correlation=corExp(form=~east+north, metric='euclidean'),
-#                        method = 'ML', data = stability.env)
+#                        method = 'ML', data = hetero.div)
 
-## AIC =   -57.88722
+## AIC = -7.420573
 
 
 ## Diversity and climate
 
 m.resist.divclim <- gls(evi.mag ~ nat.fres + var.tg + var.rr + ft.tg + ft.rr, correlation=corExp(form=~east+north, metric='euclidean'),
-                        method = 'ML', data = stability.env)
-
+                        method = 'ML', data = hetero.div)
 intervals(m.resist.divclim)
-## AIC = -77.50832
+## AIC = -19.36954
 
 
 ## Landcover and climate
 
 m.resist.landclim <- gls(evi.mag ~ landscape.het + var.tg + var.rr + ft.tg + ft.rr, correlation=corExp(form=~east+north, metric='euclidean'),
-                         method = 'ML', data = stability.env)
+                         method = 'ML', data = hetero.div)
 
-## AIC = -78.90291
+## AIC = -18.18446
 
 
 
