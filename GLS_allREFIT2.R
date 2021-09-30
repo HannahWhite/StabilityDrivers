@@ -127,7 +127,7 @@ m.var.divclim <- gls(log(evi.var) ~ nat.fres + var.tg + var.rr + ft.tg + ft.rr, 
 
 
 
-### Resistance
+### Magnitude of extreme anomalies
 
 
 #m.resist.null <- gls(evi.mag ~ 1, correlation=corExp(form=~east+north, metric='euclidean'),
