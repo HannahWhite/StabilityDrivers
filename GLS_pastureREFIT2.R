@@ -135,19 +135,19 @@ m.var.clim <- gls(log(evi.var) ~ var.tg + var.rr + ft.tg + ft.rr, correlation=co
 
 
 
-### Resistance
+### MAgnitude of extreme anomalies
 
 
 #m.resist.null <- gls(evi.mag ~ 1, correlation=corExp(form=~east+north, metric='euclidean'),
 #                     method = 'ML', data = pasture.div)
 
-## AIC = -2515.945
+## AIC = -23.26604
 
 
 #m.resist <- gls(evi.mag ~ nat.fres + landscape.het + var.tg + var.rr + ft.tg + ft.rr, correlation=corExp(form=~east+north, metric='euclidean'),
 #                method = 'ML', data = pasture.div)
 #intervals(m.resist)
-## AIC = -2527.345 
+## AIC = -33.76677 
 
 
 ## Diversity only
@@ -155,7 +155,7 @@ m.var.clim <- gls(log(evi.var) ~ var.tg + var.rr + ft.tg + ft.rr, correlation=co
 
 #m.resist.div <- gls(evi.mag ~ nat.fres , correlation=corExp(form=~east+north, metric='euclidean'),
 #                    method = 'ML', data = pasture.div)
-## AIC = -2516.391
+## AIC = -23.47764
 
 
 ## Landcover only
@@ -164,7 +164,7 @@ m.var.clim <- gls(log(evi.var) ~ var.tg + var.rr + ft.tg + ft.rr, correlation=co
 #m.resist.land <- gls(evi.mag ~ landscape.het, correlation=corExp(form=~east+north, metric='euclidean'),
 #                     method = 'ML', data = pasture.div)
 
-## AIC = -2517.24
+## AIC = -24.35502
 
 
 ## Climate only
@@ -172,7 +172,7 @@ m.var.clim <- gls(log(evi.var) ~ var.tg + var.rr + ft.tg + ft.rr, correlation=co
 m.resist.clim <- gls(evi.mag ~ var.tg + var.rr + ft.tg + ft.rr, correlation=corExp(form=~east+north, metric='euclidean'),
                      method = 'ML', data = pasture.div)
 intervals(m.resist.clim)
-## AIC = -2529.379
+## AIC = -35.88494
 
 
 ## Diversity and landcover
@@ -180,7 +180,7 @@ intervals(m.resist.clim)
 #m.resist.divland <- gls(evi.mag ~ nat.fres + landscape.het, correlation=corExp(form=~east+north, metric='euclidean'),
 #                        method = 'ML', data = pasture.div)
 
-## AIC = -2516.683
+## AIC = -23.63436
 
 
 ## Diversity and climate
@@ -188,7 +188,7 @@ intervals(m.resist.clim)
 m.resist.divclim <- gls(evi.mag ~ nat.fres + var.tg + var.rr + ft.tg + ft.rr, correlation=corExp(form=~east+north, metric='euclidean'),
                         method = 'ML', data = pasture.div)
 intervals(m.resist.divclim)
-## AIC =  -2527.432
+## AIC =  -33.89954
 
 
 ## Landcover and climate
@@ -196,7 +196,8 @@ intervals(m.resist.divclim)
 m.resist.landclim <- gls(evi.mag ~ landscape.het + var.tg + var.rr + ft.tg + ft.rr, correlation=corExp(form=~east+north, metric='euclidean'),
                          method = 'ML', data = pasture.div)
 intervals(m.resist.landclim)
-## AIC = -2529.314
+## AIC = -35.68937
+
 
 
 
