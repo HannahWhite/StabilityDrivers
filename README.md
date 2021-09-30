@@ -2,7 +2,7 @@
 
 ### Hannah White 30.04.2020
 
-Uses stability metrics for plant productivity calculated using code in StabilityMetrics repository: variability, resistance, 
+Uses stability metrics for plant productivity calculated using Resilience_10km_method2sd_REFIT2: variability, resistance, 
 recovery time, and recovery rate. These are modelled in three sets of hectads: pasture, heterogeneous, and all. Model code is 
 found in GLS_XREFIT2.R
 
