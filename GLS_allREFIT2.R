@@ -3,6 +3,7 @@
 ######################################################################################################################
 
 ### Hannah White 09.07.2020
+### Edited 11.11.2020 for new recovery rate models with new units
 
 ## Uses 2 sd threshold for 'large' event (i.e. a 2 sigma event) and the means (rather than medians as before)
 ## Now uses more accurate EOBs data at 0.1 degree resolution
@@ -18,11 +19,11 @@ rm(list=ls())
 
 ## Read in data and extract what is required
 
-covars <- read.csv('E:\\Postdoc Grassland Resilience\\EnvironmentData\\covariates.csv', header = TRUE)
+covars <- read.csv('D:\\Postdoc Grassland Resilience\\EnvironmentData\\covariates.csv', header = TRUE)
 
 # stability metrics
 
-stability10km <- read.csv('E:\\Postdoc Grassland Resilience\\MODIS6\\Resilience\\REFIT2stability10km2sd.csv', header = TRUE)
+stability10km <- read.csv('D:\\Postdoc Grassland Resilience\\MODIS6\\Resilience\\REFIT2stability10km2sd.csv', header = TRUE)
 
 stability10km$evi.rec <- stability10km$evi.rec*8
 stability10km$evi.recrate <- stability10km$evi.recrate/8
@@ -132,13 +133,13 @@ m.var.divclim <- gls(log(evi.var) ~ nat.fres + var.tg + var.rr + ft.tg + ft.rr, 
 #m.resist.null <- gls(evi.mag ~ 1, correlation=corExp(form=~east+north, metric='euclidean'),
 #                     method = 'ML', data = stability.env)
 
-## AIC = -3964.648
+## AIC = -51.39468
 
 
 m.resist <- gls(evi.mag ~ nat.fres + landscape.het + var.tg + var.rr + ft.tg + ft.rr, correlation=corExp(form=~east+north, metric='euclidean'),
                 method = 'ML', data = stability.env)
 intervals(m.resist)
-## AIC = -3991.535
+## AIC = -77.56113
 
 
 ## Diversity only
@@ -146,7 +147,7 @@ intervals(m.resist)
 #m.resist.div <- gls(evi.mag ~ nat.fres , correlation=corExp(form=~east+north, metric='euclidean'),
 #                    method = 'ML', data = stability.env)
 
-## AIC = -3969.737
+## AIC = -56.39934
 
 
 ## Landcover only
@@ -155,7 +156,7 @@ intervals(m.resist)
 #m.resist.land <- gls(evi.mag ~ landscape.het, correlation=corExp(form=~east+north, metric='euclidean'),
 #                     method = 'ML', data = stability.env)
 
-## AIC = -3970.547
+## AIC = -56.89603
 
 
 ## Climate only
@@ -163,7 +164,7 @@ intervals(m.resist)
 #m.resist.clim <- gls(evi.mag ~ var.tg + var.rr + ft.tg + ft.rr, correlation=corExp(form=~east+north, metric='euclidean'),
 #                     method = 'ML', data = stability.env)
 
-## AIC = -3990.173
+## AIC = -76.73921
 
 
 ## Diversity and landcover
@@ -171,7 +172,7 @@ intervals(m.resist)
 #m.resist.divland <- gls(evi.mag ~ nat.fres + landscape.het, correlation=corExp(form=~east+north, metric='euclidean'),
 #                        method = 'ML', data = stability.env)
 
-## AIC =   -3971.559
+## AIC =   -57.88722
 
 
 ## Diversity and climate
@@ -180,7 +181,7 @@ m.resist.divclim <- gls(evi.mag ~ nat.fres + var.tg + var.rr + ft.tg + ft.rr, co
                         method = 'ML', data = stability.env)
 
 intervals(m.resist.divclim)
-## AIC = -3991.285
+## AIC = -77.50832
 
 
 ## Landcover and climate
@@ -188,7 +189,7 @@ intervals(m.resist.divclim)
 m.resist.landclim <- gls(evi.mag ~ landscape.het + var.tg + var.rr + ft.tg + ft.rr, correlation=corExp(form=~east+north, metric='euclidean'),
                          method = 'ML', data = stability.env)
 
-## AIC = -3992.75
+## AIC = -78.90291
 
 
 ### Recovery time
@@ -256,50 +257,50 @@ m.rec.divclim <- gls(log(evi.rec) ~ nat.fres + var.tg + var.rr + ft.tg + ft.rr, 
 #m.recrate.null <- gls(evi.recrate ~ 1, correlation=corExp(form=~east+north, metric='euclidean'),
 #                      method = 'ML', data = stability.env)
 
-## AIC = 4290.052
+## AIC = -2613.694
 
 ## Full
 m.recrate <- gls(evi.recrate ~ nat.fres + landscape.het + var.tg + var.rr + ft.tg + ft.rr, correlation=corExp(form=~east+north, metric='euclidean'),
                  method = 'ML', data = stability.env)
 intervals(m.recrate)
-## AIC = 4257.856
+## AIC = -2645.89
 
 ## Diversity only
 
 #m.recrate.div <- gls(evi.recrate ~ nat.fres, correlation=corExp(form=~east+north, metric='euclidean'),
 #                     method = 'ML', data = stability.env)
 
-## AIC =  4289.771 
+## AIC =  -2613.975 
 
 ## Landcover only 
 #m.recrate.land <- gls(evi.recrate ~ landscape.het, correlation=corExp(form=~east+north, metric='euclidean'),
 #                      method = 'ML', data = stability.env)
 
-## AIC =  4291.978
+## AIC =  -2611.768
 
 ## Climate only
 m.recrate.clim <- gls(evi.recrate ~ var.tg + var.rr + ft.tg + ft.rr, correlation=corExp(form=~east+north, metric='euclidean'),
                       method = 'ML', data = stability.env)
 intervals(m.recrate.clim)
-## AIC = 4258.463
+## AIC = -2645.283
 
 ## Diversity and landcover
 
 #m.recrate.divland <- gls(evi.recrate ~ nat.fres + landscape.het, correlation=corExp(form=~east+north, metric='euclidean'),
 #                         method = 'ML', data = stability.env)
 
-## AIC = 4291.691
+## AIC = -2612.055
 
 ## Diversity and climate
 m.recrate.divclim <- gls(evi.recrate ~ nat.fres + var.tg + var.rr + ft.tg + ft.rr, correlation=corExp(form=~east+north, metric='euclidean'),
                          method = 'ML', data = stability.env)
 intervals(m.recrate.divclim)
-## AIC = 4257.681
+## AIC = -2646.065
 
 ## Landcover and climate
 #m.recrate.landclim <- gls(evi.recrate ~ landscape.het + var.tg + var.rr + ft.tg + ft.rr, correlation=corExp(form=~east+north, metric='euclidean'),
 #                          method = 'ML', data = stability.env)
 
-## AIC = 4260.23
+## AIC = -2643.516
 
 
